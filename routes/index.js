@@ -10,10 +10,6 @@ var Order = require('../models/order');
 /* GET home page. */
 router.get('/', function(req, res, next) {
   var successMsg = req.flash('success')[0];
-    // console.log(req);
-    // console.log(res);
-    // console.log(next);
-    console.log(next);
     
   Product.find(function(err, docs) {
     console.log(docs);
