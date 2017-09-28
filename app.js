@@ -15,7 +15,7 @@ var MongoStore = require('connect-mongo')(session);
 //----------------
 // configURL.URL
 // var configURL = require('../public/database/config.js');
-var url = 'mongodb://Chabbe:Charbel1234@ds143754.mlab.com:43754/gamestore';
+var url = 'mongodb://Chabbe:XXXXX@ds143754.mlab.com:43754/gamestore';
 
 var options = { server: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 60000 } }, 
                 replset: { socketOptions: { keepAlive: 300000, connectTimeoutMS : 60000 } } };
@@ -33,7 +33,6 @@ var index = require('./routes/index');
 var userRoutes = require('./routes/user');
 
 var app = express();  
-console.log("app-express");
 
 
 // var promise = mongoose.connect('mongodb://localhost:27017/shopping', { // ORIGINAL
@@ -62,7 +61,6 @@ app.use(cookieParser());
 //   store: new MongoStore({ mongooseConnection: mongoose.connection }),
 //   cookie: { maxAge: 10 * 60 * 1000 }
 // }));
-console.log("before-session");
 
 app.use(session({
   secret: 'myCurrentSession', 
@@ -84,7 +82,6 @@ app.use(function(req, res, next) {
 
 app.use('/user', userRoutes);
 app.use('/', index);
-console.log("use-routers");
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
@@ -104,5 +101,4 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
-console.log("app-export");
 

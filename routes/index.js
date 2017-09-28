@@ -1,6 +1,8 @@
 //GET EXPRESS ROUTING
 var express = require('express');
 var router = express.Router();
+// var mongoose = require('mongoose');// ORIGINAL
+//  var Product = mongoose.model('Product');
 
 //GET MODELS
 var Cart = require('../models/cart');
@@ -12,13 +14,23 @@ router.get('/', function(req, res, next) {
   var successMsg = req.flash('success')[0];
     
   Product.find(function(err, docs) {
-    console.log(docs);
-        var productChunks = [];
-        var chunkSize = 3;
-        for(var i = 0; i < docs.length; i += chunkSize) {
-          productChunks.push(docs.slice(i, i + chunkSize));
-        }
-        res.render('shop/index', { title: 'ShopCart', products: productChunks, successMsg: successMsg, noMessages: !successMsg });
+    
+    if (err) {
+      console.log(err.message);
+    }
+
+    if (docs != null) {
+      var productChunks = [];
+      var chunkSize = 3;
+      for(var i = 0; i < docs.length; i += chunkSize) {
+        productChunks.push(docs.slice(i, i + chunkSize));
+      }
+      res.render('shop/index', { title: 'ShopCart', products: productChunks, successMsg: successMsg, noMessages: !successMsg });
+    }
+    else {
+      console.log(docs);
+    }
+
   });
 });
 

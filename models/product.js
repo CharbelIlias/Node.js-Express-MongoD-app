@@ -10,7 +10,6 @@ var schema = new Schema({
 }, { bufferCommands: false });
 
 module.exports = mongoose.model('Product', schema);
-console.log("done product schema");
 
 
 

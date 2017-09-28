@@ -1,6 +1,5 @@
 // var Product = require('../models/Product'); // ORIGINAL
-var mongoose = require('mongoose');// ORIGINAL
-var Product = mongoose.model('Product');
+
 // var configURL = require('../public/database/config.js');
 
 // var promise = mongoose.connect('mongodb://localhost:27017/shopping', { // ORIGINAL
@@ -9,16 +8,18 @@ var Product = mongoose.model('Product');
 // });
 
 
+var mongoose = require('mongoose');// ORIGINAL
+// var Product = mongoose.model('Product');
+var Product = require('../models/product');
 
-var url = 'mongodb://Chabbe:Charbel1234@ds143754.mlab.com:43754/gamestore';
-console.log("under url-seeder");
+
+var url = 'mongodb://Chabbe:XXXXX@ds143754.mlab.com:43754/gamestore';
 var options = { server: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 60000 } }, 
                 replset: { socketOptions: { keepAlive: 300000, connectTimeoutMS : 60000 } } };
 //mongoose.connect(url,options);
 mongoose.createConnection(url, options);
 var conn = mongoose.connection;
 conn.on('error', console.error.bind(console, 'connection error:'));
-console.log("inside product seeder");
 conn.once('open', function() {
     var products = [
         new Product({
@@ -105,7 +106,7 @@ conn.once('open', function() {
 //     description: 'Crazy third-person shooter!',
 //     price: 20
 //     })
-// ];  
+// ];  n
 
 // var done = 0;  // ORIGINAL!!
 // for (var i = 0; i < products.length; i++) {

@@ -10,5 +10,4 @@ var schema = new Schema({
 }, { bufferCommands: false });
 
 module.exports = mongoose.model('Order', schema);
-console.log("done order schema");
 
