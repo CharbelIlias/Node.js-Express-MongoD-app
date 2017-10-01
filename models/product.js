@@ -9,6 +9,7 @@ var schema = new Schema({
     price: {type: Number, required: true}
 }, { bufferCommands: false });
 
+
 module.exports = mongoose.model('Product', schema);
 
 

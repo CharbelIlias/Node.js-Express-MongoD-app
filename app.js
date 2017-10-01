@@ -12,36 +12,27 @@ var flash = require('connect-flash');
 var validator = require('express-validator');
 var MongoStore = require('connect-mongo')(session);
 
-//----------------
-// configURL.URL
-// var configURL = require('../public/database/config.js');
-var url = 'mongodb://Chabbe:XXXXX@ds143754.mlab.com:43754/gamestore';
+var url = 'mongodb://Chabbe:XXXX@ds143754.mlab.com:43754/gamestore';
 
-var options = { server: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 60000 } }, 
-                replset: { socketOptions: { keepAlive: 300000, connectTimeoutMS : 60000 } } };
-//mongoose.connect(url,options);
-mongoose.createConnection(url, options);
+var options = { server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } }, 
+                replset: { socketOptions: { keepAlive: 1, connectTimeoutMS : 30000 } } };
+mongoose.connect(url, options);
+//mongoose.createConnection(url, options);
 var conn = mongoose.connection;
 conn.on('error', console.error.bind(console, 'connection error:')); 
 conn.once('open', function() {
   // Wait for the database connection to establish, then start the app.                         
 console.log('db connection established');
 });
-//----------------
+
 
 var index = require('./routes/index');
 var userRoutes = require('./routes/user');
 
 var app = express();  
 
-
-// var promise = mongoose.connect('mongodb://localhost:27017/shopping', { // ORIGINAL
-//   useMongoClient: true,
-//   /* other options */
-// });
-
 require('./config/passport');
-require('./models/product-seeder');
+// require('./models/product-seeder'); // This runs the product-seeder.js, run once then comment out.
 
 // view engine setup
 app.engine('.hbs', expressHbs({defaultLayout: 'layout', extname: '.hbs'}));
@@ -54,14 +45,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(validator());
 app.use(cookieParser());
-// app.use(session({ // ORIGINAL!!
-//   secret: 'myCurrentSession', 
-//   resave: false, 
-//   saveUninitialized: false,
-//   store: new MongoStore({ mongooseConnection: mongoose.connection }),
-//   cookie: { maxAge: 10 * 60 * 1000 }
-// }));
-
 app.use(session({
   secret: 'myCurrentSession', 
   resave: false, 

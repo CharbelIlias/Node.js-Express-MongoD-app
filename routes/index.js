@@ -9,10 +9,10 @@ var Cart = require('../models/cart');
 var Product = require('../models/product');
 var Order = require('../models/order');
 
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   var successMsg = req.flash('success')[0];
-    
   Product.find(function(err, docs) {
     
     if (err) {
@@ -30,10 +30,8 @@ router.get('/', function(req, res, next) {
     else {
       console.log(docs);
     }
-
   });
 });
-
 
 // GET Add to cart
 router.get('/add-to-cart/:id', function(req,res,next) {
